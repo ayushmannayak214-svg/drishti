@@ -1,0 +1,423 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #C3C49E;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    padding: 30px 5%;
+}
+
+
+/*LOGO*/
+
+.logo-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 240px;
+    height: auto;
+    object-fit: contain;
+}
+
+
+/*SIGNUP CARD*/
+
+.signup-card {
+    width: min(900px, 95%);
+    margin: 50px auto 30px;
+    display: grid;
+    grid-template-columns: 35% 65%;
+    background-color: #f8f7e8;
+    border: 1px solid #6f6f52;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.25);
+}
+
+
+/*LEFT INFORMATION SECTION*/
+
+.signup-info {
+    background-color: #8F7E4F;
+    color: white;
+    min-height: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 30px;
+}
+
+.signup-info h2 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.signup-info p {
+    max-width: 220px;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/*PROFILE ICON*/
+
+.profile-icon {
+    width: 225px;
+    height: 225px;
+    background-color: white;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-head {
+    width: 72px;
+    height: 72px;
+    background-color: #aaa;
+    border-radius: 50%;
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.profile-body {
+    width: 175px;
+    height: 105px;
+    background-color: #aaa;
+    border-radius: 50% 50% 0 0;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+/* =========================
+   FORM SECTION
+========================= */
+
+.signup-form {
+    background-color: #f8f7e8;
+    padding: 40px 45px;
+}
+
+.signup-form h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.form-description {
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 28px;
+}
+
+
+/*FORM GROUP*/
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.form-group label span {
+    font-weight: normal;
+    color: #666;
+    font-size: 13px;
+}
+
+
+/*INPUTS & SELECT*/
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #777;
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 0 13px;
+    font-size: 15px;
+    color: #333;
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: #777;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #8F7E4F;
+    box-shadow: 0 0 0 2px rgba(143, 126, 79, 0.2);
+}
+
+
+/*PASSWORD ROW*/
+
+.password-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.password-row .form-group {
+    margin-bottom: 0;
+}
+
+.password-note {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.4;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+
+/*TERMS*/
+
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 5px 0 20px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.terms input {
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    cursor: pointer;
+}
+
+.terms label {
+    cursor: pointer;
+}
+
+.terms a {
+    color: #5c4d2d;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+
+/*CREATE ACCOUNT BUTTON*/
+
+.create-account-btn {
+    width: 100%;
+    height: 47px;
+    border: none;
+    border-radius: 4px;
+    background-color: #111;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.create-account-btn:hover {
+    background-color: #333;
+}
+
+.create-account-btn:active {
+    transform: scale(0.99);
+}
+
+
+/*DIVIDER*/
+
+.divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 25px 0 20px;
+}
+
+.divider span {
+    height: 1px;
+
+    background-color: #aaa;
+
+    flex: 1;
+}
+
+.divider p {
+    font-size: 13px;
+
+    color: #555;
+}
+
+
+/*LOGIN LINK*/
+
+.login-text {
+    text-align: center;
+
+    font-size: 14px;
+
+    color: #333;
+}
+
+.login-text a {
+    color: #5c4d2d;
+
+    font-weight: 600;
+
+    text-decoration: underline;
+}
+
+.login-text a:hover {
+    color: #111;
+}
+
+
+/*TABLET*/
+
+@media (max-width: 800px) {
+
+    body {
+        padding: 25px 3%;
+    }
+
+    .logo {
+        width: 200px;
+    }
+
+    .signup-card {
+        width: 95%;
+
+        grid-template-columns: 1fr;
+
+        margin-top: 35px;
+    }
+
+    .signup-info {
+        min-height: auto;
+
+        padding: 35px 25px;
+    }
+
+    .profile-icon {
+        width: 190px;
+        height: 190px;
+    }
+
+    .profile-head {
+        width: 62px;
+        height: 62px;
+    }
+
+    .profile-body {
+        width: 150px;
+        height: 90px;
+    }
+
+
+    .signup-info h2 {
+        margin-top: 20px;
+    }
+
+    .signup-form {
+        padding: 35px;
+    }
+}
+
+
+/*MOBILE */
+
+@media (max-width: 550px) {
+
+    body {
+        padding: 20px 15px;
+    }
+
+    .logo {
+        width: 170px;
+    }
+
+    .signup-card {
+        width: 100%;
+
+        margin-top: 25px;
+
+        border-radius: 6px;
+    }
+
+    .signup-info {
+        padding: 30px 20px;
+    }
+
+    .profile-icon {
+        width: 180px;
+        height: 180px;
+    }
+
+    .profile-head {
+        width: 60px;
+        height: 60px;
+        top: 28px;
+    }
+
+    .profile-body {
+        width: 140px;
+        height: 85px;
+    }
+
+    .signup-info h2 {
+        font-size: 20px;
+    }
+
+    .signup-info p {
+        font-size: 14px;
+    }
+
+    .signup-form {
+        padding: 28px 22px;
+    }
+
+    .signup-form h1 {
+        font-size: 26px;
+    }
+
+    .password-row {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+    .password-row .form-group {
+        margin-bottom: 18px;
+    }
+
+    .password-note {
+        margin-top: -5px;
+    }
+}

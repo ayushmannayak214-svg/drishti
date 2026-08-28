@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Account - DIRE</title>
+    <link rel="stylesheet" href="create-account.css">
+</head>
+
+<body>
+
+    <header class="logo-container">
+        <img src="logo.png" alt="DIRE Logo" class="logo">
+    </header>
+
+    <main class="signup-card">
+
+        <section class="signup-info">
+
+            <div class="profile-icon">
+                <div class="profile-head"></div>
+                <div class="profile-body"></div>
+            </div>
+
+            <h2>Create Your Account</h2>
+
+            <p>
+                Join us and take a step towards
+                better eye health.
+            </p>
+
+        </section>
+
+        <section class="signup-form">
+
+            <h1>Create New Account</h1>
+
+            <p class="form-description">
+                Fill in the details below to create your account.
+            </p>
+
+            <form id="signupForm">
+
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input
+                        type="text"
+                        id="fullname"
+                        name="fullname"
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">
+                        Phone Number
+                        <span>(Optional)</span>
+                    </label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter your phone number"
+                    >
+                </div>
+
+                <div class="password-row">
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password">
+                            Confirm Password
+                        </label>
+                        <input
+                            type="password"
+                            id="confirm-password"
+                            name="confirm-password"
+                            placeholder="Confirm your password"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <p class="password-note">
+                    Password must be at least 8 characters long and
+                    include a number and a special character.
+                </p>
+
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required>
+                        <option value="" disabled selected>
+                            Select your role
+                        </option>
+                        <option value="patient">Patient</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="healthcare-professional">
+                            Healthcare Professional
+                        </option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="terms">
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        name="terms"
+                        required
+                    >
+
+                    <label for="terms">
+                        I agree to the
+                        <a href="#">Terms of Service</a>
+                        and
+                        <a href="#">Privacy Policy</a>.
+                    </label>
+                </div>
+
+                <button type="submit" class="create-account-btn">
+                    Create Account
+                </button>
+
+            </form>
+
+            <div class="divider">
+                <span></span>
+                <p>OR</p>
+                <span></span>
+            </div>
+
+            <p class="login-text">
+                Already have an account?
+                <a href="index.html">Login</a>
+            </p>
+
+        </section>
+
+    </main>
+    <script src="signup.js"></script>
+
+</body>
+</html>
