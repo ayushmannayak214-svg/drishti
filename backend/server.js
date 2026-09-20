@@ -28,14 +28,18 @@ app.use(
     })
 );
 
+app.set("trust proxy", 1);
+
 app.use(
     session({
         secret: "drishti-session-secret",
         resave: false,
         saveUninitialized: false,
+        proxy: true,
         cookie: {
             httpOnly: true,
-            secure: false,
+            secure: "auto",
+            sameSite: "lax",
             maxAge: 24 * 60 * 60 * 1000
         }
     })

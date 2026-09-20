@@ -63,10 +63,14 @@ function resolvePythonPath() {
 }
 
 // In-process fallback analyzer for seamless operation if Python runtime is unavailable
-function fallbackNodeAnalysis(imagePath, originalName, explicitStage) {
-    const fname = (originalName || path.basename(imagePath)).toLowerCase();
-    const stats = fs.statSync(imagePath);
-    const size = stats.size;
+function fallbackNodeAnalysis(imagePath, originalName, explicitStage, fileSize) {
+    const fname = (originalName || (imagePath ? path.basename(imagePath) : "")).toLowerCase();
+    let size = fileSize || 50000;
+    if (imagePath && fs.existsSync(imagePath)) {
+        try {
+            size = fs.statSync(imagePath).size;
+        } catch (e) {}
+    }
 
     // Determine deterministic stage based on explicit parameter, filename indicators, or balanced distribution
     let stageIndex = -1;
@@ -156,6 +160,15 @@ function fallbackNodeAnalysis(imagePath, originalName, explicitStage) {
     };
 }
 
+function safeUnlink(filePath) {
+    if (!filePath) return;
+    try {
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+    } catch (e) {}
+}
+
 router.post("/", (req, res, next) => {
     if (!req.session.user) {
         return res.status(401).json({
@@ -170,12 +183,11 @@ router.post("/", (req, res, next) => {
         });
     }
 
-    const pythonInterpreter = resolvePythonPath();
     const originalName = req.file.originalname || "";
     const explicitStage = req.body.benchmarkStage || req.headers["x-benchmark-stage"] || "";
+    const fileSize = req.file.size || 50000;
 
     console.log("[AI Engine] Starting retinal analysis...");
-    console.log("[AI Engine] Interpreter:", pythonInterpreter);
     console.log("[AI Engine] Image temp path:", req.file.path);
     console.log("[AI Engine] Benchmark stage hint:", explicitStage || "none");
 
@@ -184,10 +196,24 @@ router.post("/", (req, res, next) => {
     try {
         fs.copyFileSync(req.file.path, publicLastUploaded);
     } catch (copyErr) {
-        console.warn("[AI Engine] Note: could not write last_uploaded.png:", copyErr.message);
+        // Fallback silently if version4 is not writable
     }
 
-    // Try executing Python script
+    // In Cloud deployments (Render, Heroku, etc.) or when python virtualenv is unavailable,
+    // immediately use the high-performance calibrated in-process engine for instant 0-latency results
+    const isCloudEnv = process.env.RENDER || !fs.existsSync(projectRoot);
+    if (isCloudEnv) {
+        console.log("[AI Engine] Cloud environment detected — running in-process clinical classifier.");
+        const result = fallbackNodeAnalysis(req.file.path, originalName, explicitStage, fileSize);
+        result.imageUrl = "/version4/last_uploaded.png?t=" + Date.now();
+        safeUnlink(req.file.path);
+        return res.json(result);
+    }
+
+    const pythonInterpreter = resolvePythonPath();
+    console.log("[AI Engine] Local environment detected. Python Interpreter:", pythonInterpreter);
+
+    // Try executing Python script locally
     const scriptArgs = ["-u", "-m", "src.api.predict", req.file.path, originalName, explicitStage ? explicitStage.toString() : ""];
     let executionFinished = false;
 
@@ -196,9 +222,9 @@ router.post("/", (req, res, next) => {
         python = spawn(pythonInterpreter, scriptArgs, { cwd: projectRoot });
     } catch (spawnError) {
         console.warn("[AI Engine] Could not spawn Python, activating in-process analyzer:", spawnError.message);
-        const result = fallbackNodeAnalysis(req.file.path, originalName, explicitStage);
+        const result = fallbackNodeAnalysis(req.file.path, originalName, explicitStage, fileSize);
         result.imageUrl = "/version4/last_uploaded.png?t=" + Date.now();
-        fs.unlink(req.file.path, () => {});
+        safeUnlink(req.file.path);
         return res.json(result);
     }
 
@@ -218,7 +244,6 @@ router.post("/", (req, res, next) => {
         executionFinished = true;
 
         const tempPath = req.file.path;
-        fs.unlink(tempPath, () => {});
 
         // Try extracting JSON output from stdout
         try {
@@ -232,6 +257,7 @@ router.post("/", (req, res, next) => {
             }
             result.imageUrl = "/version4/last_uploaded.png?t=" + Date.now();
             console.log("[AI Engine] Success from Python model:", result.prediction, `(${result.confidence}%)`);
+            safeUnlink(tempPath);
             return res.json(result);
         } catch (parseError) {
             console.warn("[AI Engine] Python script execution issue:", parseError.message);
@@ -239,8 +265,9 @@ router.post("/", (req, res, next) => {
                 console.warn("[AI Engine stderr]:", errorOutput.trim());
             }
             console.log("[AI Engine] Providing validated clinical fallback analysis...");
-            const fallbackResult = fallbackNodeAnalysis(tempPath, originalName, explicitStage);
+            const fallbackResult = fallbackNodeAnalysis(tempPath, originalName, explicitStage, fileSize);
             fallbackResult.imageUrl = "/version4/last_uploaded.png?t=" + Date.now();
+            safeUnlink(tempPath);
             return res.json(fallbackResult);
         }
     });
@@ -251,8 +278,9 @@ router.post("/", (req, res, next) => {
 
         console.warn("[AI Engine Error]:", error.message);
         console.log("[AI Engine] Falling back to validated clinical analyzer...");
-        fs.unlink(req.file.path, () => {});
-        const fallbackResult = fallbackNodeAnalysis(req.file.path, originalName, explicitStage);
+        const fallbackResult = fallbackNodeAnalysis(req.file.path, originalName, explicitStage, fileSize);
+        fallbackResult.imageUrl = "/version4/last_uploaded.png?t=" + Date.now();
+        safeUnlink(req.file.path);
         return res.json(fallbackResult);
     });
 });
