@@ -6,3 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 .DS_Store
 Thumbs.db
+*.keras
+*.h5
+*.pth
+*.pt
+
