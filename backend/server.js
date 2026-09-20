@@ -55,9 +55,15 @@ app.get("/api/health", (req, res) => {
     });
 });
 
-// Serve frontend web files directly
+// Serve frontend web files directly with no-cache headers for instant updates
 const frontendDir = path.join(__dirname, "..");
-app.use(express.static(frontendDir));
+app.use(express.static(frontendDir, {
+    setHeaders: (res) => {
+        res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+        res.setHeader("Pragma", "no-cache");
+        res.setHeader("Expires", "0");
+    }
+}));
 
 // Fallback to index.html for root navigation
 app.get("/", (req, res) => {
@@ -72,6 +78,6 @@ db.query("SELECT 1", (err, result) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`DRISHTI server running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`DRISHTI server running on port ${PORT}`);
 });

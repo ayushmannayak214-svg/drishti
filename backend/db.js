@@ -335,22 +335,27 @@ function initMySqlTables(pool) {
     });
 }
 
-try {
-    mysqlPool = mysql.createPool(DB_CONFIG);
-    mysqlPool.getConnection((err, conn) => {
-        if (err) {
-            console.warn("[Database Notice] MySQL server is not reachable at " + DB_CONFIG.host + " (" + err.code + ").");
-            console.log("[Database Notice] Seamlessly activated local persistent database engine (dire_local_data.json).");
-            activeDriver = "local";
-        } else {
-            console.log("[Database Notice] Connected successfully to MySQL database '" + DB_CONFIG.database + "'.");
-            conn.release();
-            initMySqlTables(mysqlPool);
-        }
-    });
-} catch (e) {
-    console.warn("[Database Notice] MySQL initialization failed, using local storage:", e.message);
+if (process.env.RENDER || (process.env.NODE_ENV === "production" && !process.env.DB_HOST)) {
+    console.log("[Database Notice] Cloud deployment detected. Seamlessly activated local persistent database engine (dire_local_data.json).");
     activeDriver = "local";
+} else {
+    try {
+        mysqlPool = mysql.createPool(DB_CONFIG);
+        mysqlPool.getConnection((err, conn) => {
+            if (err) {
+                console.warn("[Database Notice] MySQL server is not reachable at " + DB_CONFIG.host + " (" + err.code + ").");
+                console.log("[Database Notice] Seamlessly activated local persistent database engine (dire_local_data.json).");
+                activeDriver = "local";
+            } else {
+                console.log("[Database Notice] Connected successfully to MySQL database '" + DB_CONFIG.database + "'.");
+                conn.release();
+                initMySqlTables(mysqlPool);
+            }
+        });
+    } catch (e) {
+        console.warn("[Database Notice] MySQL initialization failed, using local storage:", e.message);
+        activeDriver = "local";
+    }
 }
 
 const db = {
