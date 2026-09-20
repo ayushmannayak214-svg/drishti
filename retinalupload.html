@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retinal Image Upload - DRISHTI</title>
+    <link rel="stylesheet" href="retinalupload.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="top-header">
+        <div class="header-left">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo">
+            </div>
+
+            <div class="page-heading">
+                <h1>Retinal Image Upload</h1>
+
+                <div class="breadcrumb">
+                    <span>Dashboard</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <span>New Screening</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <span>Patient Registration</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <span>Retinal Image Upload</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="notification">
+                <i class="fa-solid fa-bell"></i>
+                <span class="notification-count">0</span>
+            </div>
+
+            <div class="doctor-profile">
+                <div class="doctor-icon">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <span id="doctorName">Doctor</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-layout">
+
+        <aside class="sidebar">
+
+            <nav class="sidebar-navigation">
+
+                <a href="dashboard.html" class="sidebar-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="patientregistration.html" class="sidebar-item active">
+                    <i class="fa-solid fa-file-circle-plus"></i>
+                    <span>New Screening</span>
+                </a>
+
+                <a href="dashboard.html#patients" class="sidebar-item" id="patientsSidebarLink">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Patients</span>
+                </a>
+
+                <a href="screeninghistory.html" class="sidebar-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Screening History</span>
+                </a>
+
+                <a href="dashboard.html#reports" class="sidebar-item">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span>Reports</span>
+                </a>
+
+                <a href="dashboard.html#settings" class="sidebar-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a href="#" class="sidebar-item logout-item" id="logoutSidebarBtn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+
+            <div class="upload-layout">
+
+                <section class="form-card patient-summary-card">
+
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-user"></i>
+                            <h2>Patient Details</h2>
+                        </div>
+                    </div>
+
+                    <div class="patient-summary-grid">
+
+                        <div class="summary-item">
+                            <span class="summary-label">Patient ID</span>
+                            <strong id="patient-id">P1025</strong>
+                        </div>
+
+                        <div class="summary-item">
+                            <span class="summary-label">Patient Name</span>
+                            <strong id="patient-name">—</strong>
+                        </div>
+
+                        <div class="summary-item">
+                            <span class="summary-label">Screening Type</span>
+                            <strong id="screening-type">—</strong>
+                        </div>
+
+                        <div class="summary-item">
+                            <span class="summary-label">Priority</span>
+                            <strong id="priority">Normal</strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="form-card upload-card">
+
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-eye"></i>
+                            <h2>Retinal Image</h2>
+                        </div>
+                    </div>
+
+                    <div class="upload-content">
+
+                        <div class="upload-area" id="upload-area">
+
+                            <div class="upload-icon">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+
+                            <h3>Upload Retinal Fundus Image</h3>
+
+                            <p>Drag and drop your retinal image here</p>
+
+                            <span class="upload-or">or</span>
+
+                            <label for="retinal-image" class="choose-image-button">
+                                <i class="fa-solid fa-image"></i>
+                                <span>Choose JPG Image</span>
+                            </label>
+
+                            <input
+                                type="file" id="retinal-image" name="retinalImage" accept=".jpg,.jpeg,.png,image/jpeg,image/png" hidden
+                            >
+
+                            <div class="upload-information">
+
+                                <span>
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    JPG or JPEG format only
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-image"></i>
+                                    Clear retinal fundus image recommended
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="image-preview-container" id="image-preview-container">
+
+                            <div class="image-preview">
+                                <img
+                                    id="retinal-preview"
+                                    src=""
+                                    alt="Retinal image preview"
+                                >
+                            </div>
+
+                            <!-- Floating overlay: title + filename + remove button -->
+                            <div class="preview-header">
+                                <div class="preview-title">
+                                    <i class="fa-solid fa-eye"></i>
+                                    <span>Retinal Fundus</span>
+                                    <span class="image-name" id="image-name"></span>
+                                </div>
+
+                                <button type="button" class="remove-image-button" id="remove-image-button">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                    Change
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="form-card guidelines-card" id="guidelines-card">
+
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <h2>Image Guidelines</h2>
+                        </div>
+                    </div>
+
+                    <div class="guidelines-grid">
+
+                        <div class="guideline-item">
+                            <i class="fa-solid fa-check"></i>
+
+                            <div>
+                                <strong>Clear Image</strong>
+                                <p>Ensure the retina is clearly visible.</p>
+                            </div>
+                        </div>
+
+                        <div class="guideline-item">
+                            <i class="fa-solid fa-check"></i>
+
+                            <div>
+                                <strong>Good Lighting</strong>
+                                <p>Avoid excessively dark or overexposed images.</p>
+                            </div>
+                        </div>
+
+                        <div class="guideline-item">
+                            <i class="fa-solid fa-check"></i>
+
+                            <div>
+                                <strong>Proper Focus</strong>
+                                <p>The retinal region should be in focus.</p>
+                            </div>
+                        </div>
+
+                        <div class="guideline-item">
+                            <i class="fa-solid fa-check"></i>
+
+                            <div>
+                                <strong>JPG / JPEG</strong>
+                                <p>Upload a JPG or JPEG retinal image.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="back-button"
+                        onclick="window.location.href='patientregistration.html'">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Back</span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="analysis-button"
+                        id="analysis-button"
+                        disabled>
+
+                        <span>Start Analysis</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- AI Analysis Progress Overlay Modal -->
+    <div class="analysis-modal-overlay" id="analysisModalOverlay" style="display: none;">
+        <div class="analysis-modal-card">
+            <div class="modal-pulse-scanner">
+                <i class="fa-solid fa-eye-dropper-empty eye-pulse-icon"></i>
+                <div class="scanner-ring ring-1"></div>
+                <div class="scanner-ring ring-2"></div>
+            </div>
+            <h3 class="modal-title">AI Retinal Analysis in Progress</h3>
+            <p class="modal-subtitle" id="analysisStatusText">Uploading retinal fundus photograph...</p>
+            
+            <div class="analysis-steps-list">
+                <div class="step-item active" id="stepIQA">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Image Quality & Integrity Check</span>
+                </div>
+                <div class="step-item" id="stepFeatures">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i>
+                    <span>Microvascular Lesion & Exudate Extraction</span>
+                </div>
+                <div class="step-item" id="stepStaging">
+                    <i class="fa-regular fa-circle"></i>
+                    <span>ICDR 5-Grade Triage & Referability Classification</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="retinalupload.js"></script>
+
+</body>
+</html>

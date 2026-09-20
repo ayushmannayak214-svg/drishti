@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration - DRISHTI</title>
+    <link rel="stylesheet" href="patientregistration.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="header-left">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo">
+            </div>
+
+            <div class="page-heading">
+                <h1>Patient Registration</h1>
+                <div class="breadcrumb">
+                    <span>Dashboard</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <span>New Screening</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <span>Patient Registration</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="notification">
+                <i class="fa-solid fa-bell"></i>
+                <span class="notification-count">0</span>
+            </div>
+
+            <div class="doctor-profile">
+                <div class="doctor-icon">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <span id="doctorName">Doctor</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-layout">
+
+        <aside class="sidebar">
+
+            <nav class="sidebar-navigation">
+
+                <a href="dashboard.html" class="sidebar-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="patientregistration.html" class="sidebar-item active">
+                    <i class="fa-solid fa-file-circle-plus"></i>
+                    <span>New Screening</span>
+                </a>
+
+                <a href="dashboard.html#patients" class="sidebar-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Patients</span>
+                </a>
+
+                <a href="screeninghistory.html" class="sidebar-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Screening History</span>
+                </a>
+
+                <a href="dashboard.html#reports" class="sidebar-item">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span>Reports</span>
+                </a>
+
+                <a href="dashboard.html#settings" class="sidebar-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a href="#" class="sidebar-item logout-item" id="logoutSidebarBtn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+
+            <form class="registration-form">
+
+                <div class="form-column left-column">
+
+                    <section class="form-card patient-information-card">
+
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-user"></i>
+                                <h2>Patient Information</h2>
+                            </div>
+                        </div>
+
+                        <div class="form-grid patient-grid">
+
+                            <div class="form-group">
+                                <label for="patient-id">Patient ID</label>
+                                <input type="text" id="patient-id" name="patientId" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="full-name">Full Name <span>*</span></label>
+                                <input type="text" id="full-name" name="fullName" placeholder="Enter full name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="age">Age <span>*</span></label>
+                                <input type="number" id="age" name="age" readonly required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date-of-birth">Date of Birth</label>
+                                <input type="date" id="date-of-birth" name="dateOfBirth">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gender">Gender <span>*</span></label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-number">Contact Number <span>*</span></label>
+                                <input type="tel" id="contact-number" name="contactNumber" placeholder="Enter mobile number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="Enter email address">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="address">Address</label>
+                                <textarea id="address" name="address" placeholder="Enter full address"></textarea>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <section class="form-card medical-history-card">
+
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-square-plus"></i>
+                                <h2>Medical History</h2>
+                            </div>
+                        </div>
+
+                        <div class="form-grid medical-grid">
+
+                            <div class="form-group">
+                                <label for="past-illness">Past Illness</label>
+                                <select id="past-illness" name="pastIllness">
+                                    <option value="">Select / Type</option>
+                                    <option value="none">None</option>
+                                    <option value="diabetes">Diabetes</option>
+                                    <option value="hypertension">Hypertension</option>
+                                    <option value="heart-disease">Heart Disease</option>
+                                    <option value="asthma">Asthma</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="chronic-diseases">Chronic Diseases</label>
+                                <select id="chronic-diseases" name="chronicDiseases">
+                                    <option value="">Select / Type</option>
+                                    <option value="none">None</option>
+                                    <option value="diabetes">Diabetes</option>
+                                    <option value="hypertension">Hypertension</option>
+                                    <option value="kidney-disease">Kidney Disease</option>
+                                    <option value="heart-disease">Heart Disease</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="past-surgeries">Past Surgeries</label>
+                                <select id="past-surgeries" name="pastSurgeries">
+                                    <option value="">Select / Type</option>
+                                    <option value="none">None</option>
+                                    <option value="minor">Minor Surgery</option>
+                                    <option value="major">Major Surgery</option>
+                                    <option value="multiple">Multiple Surgeries</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="allergies">Allergies</label>
+                                <select id="allergies" name="allergies">
+                                    <option value="">Select / Type</option>
+                                    <option value="none">None</option>
+                                    <option value="medicine">Medicine</option>
+                                    <option value="food">Food</option>
+                                    <option value="environmental">Environmental</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="current-medications">Current Medications</label>
+                                <textarea id="current-medications" name="currentMedications" placeholder="Enter current medications"></textarea>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <section class="form-card symptoms-card">
+
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-rectangle-list"></i>
+                                <h2>Current Symptoms / Clinical Notes</h2>
+                            </div>
+                        </div>
+
+                        <div class="form-grid symptoms-grid">
+
+                            <div class="form-group">
+                                <label for="symptoms">Symptoms</label>
+                                <textarea id="symptoms" name="symptoms" placeholder="Enter current symptoms"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="clinical-notes">Clinical Notes</label>
+                                <textarea id="clinical-notes" name="clinicalNotes" placeholder="Enter any additional clinical notes"></textarea>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+                <div class="form-column right-column">
+
+                    <section class="form-card emergency-card">
+
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-phone"></i>
+                                <h2>Emergency Contact</h2>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emergency-name">Contact Person Name</label>
+                            <input type="text" id="emergency-name" name="emergencyName" placeholder="Enter name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="relationship">Relationship</label>
+                            <input type="text" id="relationship" name="relationship" placeholder="Enter relationship">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emergency-number">Contact Number</label>
+                            <input type="tel" id="emergency-number" name="emergencyNumber" placeholder="Enter mobile number">
+                        </div>
+
+                    </section>
+
+                    <section class="form-card screening-card">
+
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-square"></i>
+                                <h2>Screening Details</h2>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="screening-type">Screening Type <span>*</span></label>
+                            <select id="screening-type" name="screeningType" required>
+                                <option value="diabetes">Diabetes Screening</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priority">Priority</label>
+                            <select id="priority" name="priority">
+                                <option value="normal">Normal</option>
+                                <option value="high">High</option>
+                                <option value="urgent">Urgent</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="referred-by">Referred By</label>
+                            <input type="text" id="referred-by" name="referredBy" placeholder="Enter referrer name (optional)">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <textarea id="notes" name="notes" placeholder="Additional notes (optional)"></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="reset" class="reset-button">Reset</button>
+                            <button type="submit" class="screening-button">
+                                <span>Start Screening</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </form>
+
+        </main>
+
+    </div>
+
+    <script src="patientregistration.js"></script>
+
+</body>
+</html>

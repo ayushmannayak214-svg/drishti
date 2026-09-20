@@ -1,0 +1,15 @@
+AI-model/data/
+AI-model-v2/data/
+AI-model-v2/AI-model/
+AI-model-v2/AI-model/data/
+AI-model-v2/AI-model/data/raw/
+AI-model-v2/AI-model/data/raw/train_images/
+AI-model-v2/AI-model/data/raw/test_images/
+*.h5
+*.keras
+*.pth
+*.pt
+*.ckpt
+*.onnx
+__pycache__/
+*.pyc

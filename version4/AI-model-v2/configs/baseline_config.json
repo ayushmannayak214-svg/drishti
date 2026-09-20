@@ -1,0 +1,41 @@
+{
+  "model_id": "RETINEX-DR-v1.0-BASELINE",
+  "backbone": "efficientnetv2_rw_s.ra2_in1k",
+  "framework": "PyTorch 2.6.0",
+  "image_size": [
+    300,
+    300
+  ],
+  "seed": 42,
+  "num_classes": 5,
+  "class_names": [
+    "No_DR",
+    "Mild",
+    "Moderate",
+    "Severe",
+    "Proliferative_DR"
+  ],
+  "dataset": "APTOS 2019 Blindness Detection",
+  "train_samples": 2929,
+  "val_samples": 733,
+  "pooling": "ConcatPooling (GAP + GMP)",
+  "optimizer": "AdamW",
+  "learning_rate": 1e-05,
+  "scheduler": "CosineAnnealingLR",
+  "loss": "CombinedLoss (LabelSmoothingCE + Focal)",
+  "hardware": "Intel(R) Arc(TM) 130V GPU (8GB)",
+  "baseline_metrics": {
+    "val_acc": 0.8076,
+    "qwk": 0.8447,
+    "macro_f1": 0.595,
+    "referable_sensitivity": 0.906,
+    "referable_specificity": 0.9264,
+    "class_recalls": {
+      "No_DR": 0.9668,
+      "Mild": 0.5405,
+      "Moderate": 0.845,
+      "Severe": 0.1795,
+      "Proliferative_DR": 0.3729
+    }
+  }
+}

@@ -1,0 +1,524 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --body-color: #a49ec4;
+    --header-color: #444581;
+    --sidebar-color: #2e2c5f;
+    --card-color: #e9ebf7;
+    --card-border: #aaa8d0;
+    --text-color: #17212B;
+    --accent-color: #363775;
+    --input-border: #c6c8dc;
+}
+body {
+    min-height: 100vh;
+    background-color: #a49ec4;
+    color: #1f2029;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+.top-header {
+    height: 102px;
+    width: 100%;
+    background-color: var(--header-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    color: #ffffff;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 65px;
+}
+.logo-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.page-heading h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+}
+.breadcrumb i {
+    font-size: 10px;
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+.notification {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.notification i {
+    font-size: 24px;
+}
+.notification-count {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 5px;
+    background-color: #1f2029;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.doctor-profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 17px;
+    font-weight: 600;
+}
+.doctor-icon {
+    width: 56px;
+    height: 56px;
+    background-color: #e9ebf7;
+    color: var(--header-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.doctor-icon i {
+    font-size: 22px;
+}
+.page-layout {
+    min-height: calc(100vh - 102px);
+    display: flex;
+}
+.sidebar {
+    width: 225px;
+    min-width: 225px;
+    background-color: var(--sidebar-color);
+    padding: 34px 15px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top: solid 1px white;
+}
+.sidebar-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+.sidebar-item {
+    height: 56px;
+    padding: 0 16px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+.sidebar-item i {
+    width: 28px;
+    text-align: center;
+    font-size: 22px;
+}
+.sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.sidebar-item.active {
+    background-color: #e9ebf7;
+    color: #17212B;
+}
+.sidebar-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    padding-top: 20px;
+}
+.logout-item {
+    margin-top: 0;
+}
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 23px 22px;
+    background-color: var(--body-color);
+}
+.registration-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 0.9fr);
+    gap: 20px;
+    align-items: start;
+}
+.form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+.form-card {
+    background-color: var(--card-color);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 22px 24px;
+}
+.card-header {
+    padding-bottom: 17px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #c6c8dc;
+}
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+.card-title i {
+    width: 22px;
+    text-align: center;
+    color: var(--accent-color);
+    font-size: 19px;
+}
+.card-title h2 {
+    font-size: 19px;
+    font-weight: 700;
+}
+.form-grid {
+    display: grid;
+    gap: 19px 20px;
+}
+.patient-grid {
+    grid-template-columns: 1fr 1.25fr 0.75fr 1.25fr;
+}
+.medical-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+.symptoms-grid {
+    grid-template-columns: 1fr 1fr;
+}
+.form-group {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+.form-group label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #182029;
+}
+.form-group label span {
+    color: #5b6095;
+}
+input,
+select,
+textarea {
+    width: 100%;
+    border: 1px solid var(--input-border);
+    border-radius: 7px;
+    background-color: #FFFFFF;
+    color: #1f2029;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input,
+select {
+    height: 43px;
+    padding: 0 13px;
+}
+textarea {
+    min-height: 78px;
+    padding: 12px 13px;
+    resize: vertical;
+}
+input::placeholder,
+textarea::placeholder {
+    color: #414455;
+}
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(54, 55, 117, 0.12);
+}
+input[readonly] {
+    background-color: #dedff0;
+    color: #44465a;
+}
+select {
+    cursor: pointer;
+}
+.patient-information-card {
+    min-height: 385px;
+}
+.medical-history-card {
+    min-height: 285px;
+}
+.symptoms-card {
+    min-height: 177px;
+}
+.symptoms-card textarea {
+    min-height: 72px;
+}
+.emergency-card {
+    min-height: 355px;
+}
+.emergency-card .form-group {
+    margin-bottom: 19px;
+}
+.emergency-card .form-group:last-child {
+    margin-bottom: 0;
+}
+.screening-card {
+    min-height: 495px;
+}
+.screening-card .form-group {
+    margin-bottom: 19px;
+}
+.screening-card textarea {
+    min-height: 74px;
+}
+.form-actions {
+    border-top: 1px solid #c6c8dc;
+    margin-top: 21px;
+    padding-top: 19px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 18px;
+}
+.form-actions button {
+    height: 48px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.reset-button {
+    width: 145px;
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: #17212B;
+}
+.reset-button:hover {
+    background-color: #d9daec;
+}
+.screening-button {
+    width: 218px;
+    border: 1px solid var(--accent-color);
+    background-color: var(--accent-color);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 38px;
+}
+.screening-button:hover {
+    background-color: #2e2c5f;
+}
+.screening-button i {
+    font-size: 17px;
+}
+@media (max-width: 1100px) {
+    .header-left {
+        gap: 30px;
+    }
+    .sidebar {
+        width: 200px;
+        min-width: 200px;
+    }
+    .sidebar-item {
+        gap: 16px;
+        font-size: 14px;
+    }
+    .registration-form {
+        grid-template-columns: minmax(0, 1.8fr) minmax(290px, 1fr);
+    }
+    .patient-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .medical-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .patient-information-card,
+    .medical-history-card,
+    .symptoms-card,
+    .emergency-card,
+    .screening-card {
+        min-height: auto;
+    }
+}
+@media (max-width: 850px) {
+    .top-header {
+        padding: 0 18px;
+    }
+    .page-heading h1 {
+        font-size: 23px;
+    }
+    .breadcrumb {
+        font-size: 13px;
+    }
+    .doctor-profile span {
+        display: none;
+    }
+    .sidebar {
+        width: 75px;
+        min-width: 75px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .sidebar-item {
+        justify-content: center;
+        padding: 0;
+    }
+    .sidebar-item span {
+        display: none;
+    }
+    .sidebar-item i {
+        font-size: 20px;
+    }
+    .registration-form {
+        grid-template-columns: 1fr;
+    }
+    .right-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+}
+@media (max-width: 650px) {
+    .top-header {
+        height: 85px;
+    }
+    .page-layout {
+        min-height: calc(100vh - 85px);
+    }
+    .logo-container {
+        width: 75px;
+        height: 75px;
+    }
+    .logo-container img {
+        width: 100%;
+        height: 100%;
+    }
+    .header-left {
+        gap: 15px;
+    }
+    .page-heading h1 {
+        font-size: 19px;
+        margin-bottom: 6px;
+    }
+    .breadcrumb {
+        display: none;
+    }
+    .notification {
+        display: none;
+    }
+    .main-content {
+        padding: 15px;
+    }
+    .form-card {
+        padding: 18px;
+    }
+    .patient-grid,
+    .medical-grid,
+    .symptoms-grid {
+        grid-template-columns: 1fr;
+    }
+    .right-column {
+        display: flex;
+    }
+    .form-actions {
+        flex-direction: column;
+    }
+    .reset-button,
+    .screening-button {
+        width: 100%;
+    }
+}
+.page,
+.registration-container,
+.form-card,
+.info-panel,
+.summary-card,
+.card {
+    background-color: #e9ebf7;
+    border: 1px solid #aaa8d0;
+    color: #1f2029;
+}
+.form-title,
+.section-title,
+label,
+.field-label,
+.heading {
+    color: #1f2029;
+}
+.helper-text,
+.subtle-text,
+.muted,
+small {
+    color: #414455;
+}
+.button,
+.primary-btn,
+.submit-btn,
+.next-btn {
+    background-color: #363775;
+    color: #FFFFFF;
+}
+.button:hover,
+.primary-btn:hover,
+.submit-btn:hover,
+.next-btn:hover {
+    background-color: #2e2c5f;
+}
+.sidebar,
+.side-panel,
+.registration-header {
+    background-color: #363775;
+    color: #FFFFFF;
+}
+.accent-box,
+.status-badge,
+.info-badge,
+.tag {
+    background-color: #c9c9e8;
+    color: #1f2029;
+}
+.icon-box {
+    background-color: #6974a8;
+    color: #FFFFFF;
+}

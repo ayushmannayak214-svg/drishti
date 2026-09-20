@@ -1,0 +1,547 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --body-color: #a49ec4;
+    --header-color: #444581;
+    --sidebar-color: #2e2c5f;
+    --card-color: #e9ebf7;
+    --card-border: #aaa8d0;
+    --text-color: #1f2029;
+    --accent-color: #363775;
+    --input-border: #414455;
+}
+body {
+    min-height: 100vh;
+    background-color: var(--body-color);
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+.top-header {
+    height: 102px;
+    width: 100%;
+    background-color: var(--header-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    color: #ffffff;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 65px;
+}
+.logo-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.page-heading h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+}
+.breadcrumb i {
+    font-size: 10px;
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+.notification {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.notification i {
+    font-size: 24px;
+}
+.notification-count {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 5px;
+    background-color: #1f2029;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.doctor-profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 17px;
+    font-weight: 600;
+}
+.doctor-icon {
+    width: 56px;
+    height: 56px;
+    background-color: #e9ebf7;
+    color: var(--header-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.doctor-icon i {
+    font-size: 22px;
+}
+.page-layout {
+    min-height: calc(100vh - 102px);
+    display: flex;
+}
+.sidebar {
+    width: 225px;
+    min-width: 225px;
+    background-color: var(--sidebar-color);
+    padding: 34px 15px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top: solid 1px white;
+}
+.sidebar-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+.sidebar-item {
+    height: 56px;
+    padding: 0 16px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+.sidebar-item i {
+    width: 28px;
+    text-align: center;
+    font-size: 22px;
+}
+.sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.sidebar-item.active {
+    background-color: #e9ebf7;
+    color: #1f2029;
+}
+.sidebar-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    padding-top: 20px;
+}
+.logout-item {
+    margin-top: 0;
+}
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 23px 22px;
+    background-color: var(--body-color);
+}
+.result-layout {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.form-card {
+    background-color: var(--card-color);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 22px 24px;
+}
+.card-header {
+    padding-bottom: 17px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #c6c8dc;
+}
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+.card-title i {
+    width: 22px;
+    text-align: center;
+    color: var(--accent-color);
+    font-size: 19px;
+}
+.card-title h2 {
+    font-size: 19px;
+    font-weight: 700;
+}
+.patient-summary-card {
+    min-height: 150px;
+}
+.patient-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.summary-item {
+    min-height: 65px;
+    padding: 13px 15px;
+    background-color: #dedff0;
+    border: 1px solid var(--input-border);
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+}
+.summary-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #66687a;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+.summary-item strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+.result-card {
+    min-height: 235px;
+}
+.result-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.prediction-section {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding: 24px;
+    border: 1px solid var(--card-border);
+    border-radius: 9px;
+    background-color: #f3f4fa;
+}
+.result-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #66687a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+.prediction-value {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+.confidence-text {
+    font-size: 14px;
+    color: #66687a;
+}
+.confidence-text strong {
+    color: var(--text-color);
+    font-size: 16px;
+}
+.probabilities-card {
+    min-height: 365px;
+}
+.probability-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.probability-item {
+    width: 100%;
+}
+.probability-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.probability-header span {
+    font-size: 14px;
+    font-weight: 700;
+}
+.probability-header strong {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+.probability-bar {
+    width: 100%;
+    height: 12px;
+    border-radius: 10px;
+    background-color: #d9daec;
+    overflow: hidden;
+}
+.probability-fill {
+    height: 100%;
+    min-width: 0;
+    border-radius: 10px;
+    background-color: var(--accent-color);
+    transition: width 0.5s ease;
+}
+.interpretation-card {
+    min-height: 175px;
+}
+.interpretation-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    background-color: #f3f4fa;
+}
+.interpretation-icon {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    border-radius: 50%;
+    background-color: #d9daec;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.interpretation-icon i {
+    font-size: 24px;
+}
+.interpretation-text strong {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+.interpretation-text p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #55586a;
+}
+.result-actions {
+    border-top: 1px solid #c6c8dc;
+    padding-top: 19px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 18px;
+}
+.result-actions button {
+    height: 48px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.secondary-button {
+    width: 160px;
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: #17212B;
+    gap: 12px;
+}
+.secondary-button:hover {
+    background-color: #d9daec;
+}
+.primary-button {
+    width: 218px;
+    border: 1px solid var(--accent-color);
+    background-color: var(--accent-color);
+    color: #ffffff;
+    gap: 28px;
+}
+.primary-button:hover {
+    background-color: #2e2c5f;
+}
+.result-actions button i {
+    font-size: 16px;
+}
+@media (max-width: 1100px) {
+    .header-left {
+        gap: 30px;
+    }
+    .sidebar {
+        width: 200px;
+        min-width: 200px;
+    }
+    .sidebar-item {
+        gap: 16px;
+        font-size: 14px;
+    }
+    .patient-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .result-card {
+        min-height: auto;
+    }
+    .probabilities-card {
+        min-height: auto;
+    }
+}
+@media (max-width: 850px) {
+    .top-header {
+        padding: 0 18px;
+    }
+    .page-heading h1 {
+        font-size: 23px;
+    }
+    .breadcrumb {
+        font-size: 13px;
+    }
+    .doctor-profile span {
+        display: none;
+    }
+    .sidebar {
+        width: 75px;
+        min-width: 75px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .sidebar-item {
+        justify-content: center;
+        padding: 0;
+    }
+    .sidebar-item span {
+        display: none;
+    }
+    .sidebar-item i {
+        font-size: 20px;
+    }
+    .patient-summary-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .result-actions {
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 650px) {
+    .top-header {
+        height: 85px;
+    }
+    .page-layout {
+        min-height: calc(100vh - 85px);
+    }
+    .logo-container {
+        width: 75px;
+        height: 75px;
+    }
+    .logo-container img {
+        width: 100%;
+        height: 100%;
+    }
+    .header-left {
+        gap: 15px;
+    }
+    .page-heading h1 {
+        font-size: 19px;
+        margin-bottom: 6px;
+    }
+    .breadcrumb {
+        display: none;
+    }
+    .notification {
+        display: none;
+    }
+    .main-content {
+        padding: 15px;
+    }
+    .form-card {
+        padding: 18px;
+    }
+    .patient-summary-grid {
+        grid-template-columns: 1fr;
+    }
+    .prediction-value {
+        font-size: 28px;
+    }
+    .interpretation-content {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .result-actions {
+        flex-direction: column;
+    }
+    .secondary-button,
+    .primary-button {
+        width: 100%;
+    }
+}
+
+/* Official Print / Medical PDF Report Styles */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    .top-header,
+    .sidebar,
+    .result-actions,
+    .breadcrumb,
+    .notification {
+        display: none !important;
+    }
+    .page-layout {
+        display: block !important;
+        width: 100% !important;
+    }
+    .main-content {
+        padding: 0 !important;
+        width: 100% !important;
+    }
+    .form-card {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        background: #ffffff !important;
+        page-break-inside: avoid;
+        margin-bottom: 20px !important;
+    }
+    .probability-bar {
+        background: #e5e7eb !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .probability-fill {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .triage-pill {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

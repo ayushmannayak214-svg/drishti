@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screening History - DRISHTI</title>
+    <link rel="stylesheet" href="screeninghistory.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo">
+            </div>
+
+            <div class="brand-text">
+                <h1>DRISHTI</h1>
+                <p>Intelligent. Accurate. Accessible.</p>
+            </div>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <button class="notification-btn" id="notificationBtn">
+                <i class="fa-solid fa-bell"></i>
+                <span class="notification-count" id="notificationCount">0</span>
+            </button>
+
+            <div class="doctor-profile">
+
+                <div class="profile-icon">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+
+                <span class="doctor-name" id="doctorName">Doctor</span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+
+            <nav class="sidebar-nav">
+
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="patientregistration.html" class="nav-item">
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                    </span>
+                    <span>New Screening</span>
+                </a>
+
+                <a href="dashboard.html#patients" class="nav-item" id="patientsBtn">
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </span>
+                    <span>Patients</span>
+                </a>
+
+                <a href="screeninghistory.html" class="nav-item active" id="historyBtn">
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </span>
+                    <span>Screening History</span>
+                </a>
+
+                <a href="dashboard.html#reports" class="nav-item" id="reportsBtn">
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-chart-column"></i>
+                    </span>
+                    <span>Reports</span>
+                </a>
+
+                <a href="dashboard.html#settings" class="nav-item" id="settingsBtn">
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-gear"></i>
+                    </span>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+
+            <button class="logout-btn" id="logoutBtn">
+
+                <span class="nav-icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </span>
+
+                <span>Logout</span>
+
+            </button>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <section class="welcome-section">
+
+                <div>
+
+                    <h2>
+                        Screening History
+                    </h2>
+
+                    <p>
+                        View and review previously completed retinal screenings.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="history-card card">
+
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+
+                    <div>
+                        <h2>All Screenings</h2>
+                        <p>Previously completed patient screenings</p>
+                    </div>
+
+                    <div class="history-filters" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <div style="position: relative;">
+                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #888aa0; font-size: 13px;"></i>
+                            <input type="text" id="historySearchInput" placeholder="Search patient ID or name..." style="padding: 8px 12px 8px 34px; border-radius: 6px; border: 1px solid #aaa8d0; font-size: 13px; outline: none; min-width: 220px;">
+                        </div>
+
+                        <select id="historyFilterSelect" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #aaa8d0; font-size: 13px; background: white; outline: none;">
+                            <option value="all">All Stages</option>
+                            <option value="No_DR">No DR (Grade 0)</option>
+                            <option value="Mild">Mild (Grade 1)</option>
+                            <option value="Moderate">Moderate (Grade 2)</option>
+                            <option value="Severe">Severe (Grade 3)</option>
+                            <option value="Proliferative_DR">Proliferative DR (Grade 4)</option>
+                            <option value="critical">Critical / Sight Threatening</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Patient Name</th>
+                                <th>Date</th>
+                                <th>Screening Type</th>
+                                <th>Result</th>
+                                <th>Confidence</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="historyTableBody">
+
+                            <tr id="noHistoryRow">
+
+                                <td colspan="8" class="no-history">
+
+                                    <div class="empty-icon">
+                                        <i class="fa-solid fa-clock-rotate-left"></i>
+                                    </div>
+
+                                    <h3>No Screening History</h3>
+
+                                    <p>
+                                        Completed screenings will appear here.
+                                    </p>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <section class="security-card card">
+
+                <div class="security-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div class="security-text">
+
+                    <h2>Your Data is Secure</h2>
+
+                    <p>
+                        We follow strict security protocols to ensure patient data privacy and confidentiality.
+                    </p>
+
+                </div>
+
+                <div class="security-lock">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="screeninghistory.js"></script>
+
+</body>
+</html>

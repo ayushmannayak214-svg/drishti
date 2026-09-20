@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Health Screening - Dashboard</title>
+    <title>DRISHTI - Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -14,66 +14,75 @@
                 <img src="logo.png" alt="Logo">
             </div>
             <div class="brand-text">
-                <h1>AI HEALTH SCREENING</h1>
+                <h1>DRISHTI</h1>
                 <p>Intelligent. Accurate. Accessible.</p>
             </div>
         </div>
+
         <div class="topbar-right">
             <button class="notification-btn" id="notificationBtn">
                 <i class="fa-solid fa-bell"></i>
                 <span class="notification-count" id="notificationCount">0</span>
             </button>
+
             <div class="doctor-profile">
                 <div class="profile-icon">
                     <i class="fa-solid fa-user-doctor"></i>
                 </div>
                 <span class="doctor-name" id="doctorName">Dr. Ananya</span>
-                <!-- <button class="profile-dropdown" id="profileDropdown">
-                    <i class="fa-solid fa-chevron-down"></i>
-                </button> -->
             </div>
         </div>
     </header>
+
     <div class="dashboard-container">
+
         <aside class="sidebar">
             <nav class="sidebar-nav">
+
                 <a href="#" class="nav-item active" id="dashboardBtn">
                     <span class="nav-icon">
                         <i class="fa-solid fa-house"></i>
                     </span>
                     <span>Dashboard</span>
                 </a>
+
                 <a href="#" class="nav-item" id="newScreeningBtn">
                     <span class="nav-icon">
                         <i class="fa-solid fa-file-circle-plus"></i>
                     </span>
                     <span>New Screening</span>
                 </a>
+
                 <a href="#" class="nav-item" id="patientsBtn">
                     <span class="nav-icon">
                         <i class="fa-solid fa-users"></i>
                     </span>
                     <span>Patients</span>
                 </a>
-                <a href="#" class="nav-item" id="historyBtn">
+
+                <a href="screeninghistory.html" class="nav-item" id="historyBtn">
                     <span class="nav-icon">
                         <i class="fa-solid fa-clock-rotate-left"></i>
                     </span>
                     <span>Screening History</span>
                 </a>
+
                 <a href="#" class="nav-item" id="reportsBtn">
                     <span class="nav-icon">
                         <i class="fa-solid fa-chart-column"></i>
                     </span>
                     <span>Reports</span>
                 </a>
+
                 <a href="#" class="nav-item" id="settingsBtn">
                     <span class="nav-icon">
                         <i class="fa-solid fa-gear"></i>
                     </span>
                     <span>Settings</span>
                 </a>
+
             </nav>
+
             <button class="logout-btn" id="logoutBtn">
                 <span class="nav-icon">
                     <i class="fa-solid fa-right-from-bracket"></i>
@@ -81,22 +90,27 @@
                 <span>Logout</span>
             </button>
         </aside>
+
         <main class="main-content">
+
             <section class="welcome-section">
                 <div>
                     <h2>
-                        Good Morning,
+                        <span id="greetingText">Good Morning</span>,
                         <span id="welcomeDoctorName">Dr. Ananya</span>
                         <span class="wave">👋</span>
                     </h2>
                     <p>Here's an overview of your screening activity.</p>
                 </div>
+
                 <button class="primary-btn" id="startScreeningBtn">
                     <i class="fa-solid fa-plus"></i>
                     Start New Screening
                 </button>
             </section>
+
             <section class="statistics">
+
                 <div class="stat-card">
                     <div class="stat-icon patients-icon">
                         <i class="fa-solid fa-users"></i>
@@ -107,6 +121,7 @@
                         <span>Registered in system</span>
                     </div>
                 </div>
+
                 <div class="stat-card">
                     <div class="stat-icon screening-icon">
                         <i class="fa-solid fa-file-medical"></i>
@@ -117,6 +132,7 @@
                         <span>Screenings performed</span>
                     </div>
                 </div>
+
                 <div class="stat-card">
                     <div class="stat-icon pending-icon">
                         <i class="fa-solid fa-clock"></i>
@@ -127,6 +143,7 @@
                         <span>Awaiting your review</span>
                     </div>
                 </div>
+
                 <div class="stat-card">
                     <div class="stat-icon reports-icon">
                         <i class="fa-solid fa-chart-line"></i>
@@ -137,20 +154,29 @@
                         <span>Reports this month</span>
                     </div>
                 </div>
+
             </section>
+
             <section class="dashboard-grid">
+
                 <div class="recent-screenings card">
+
                     <div class="section-header">
                         <h2>Recent Screenings</h2>
+
                         <button class="view-all-btn" id="viewAllBtn">
                             View All
                             <i class="fa-solid fa-chevron-right"></i>
                         </button>
                     </div>
+
                     <div class="table-container">
+
                         <table>
+
                             <thead>
                                 <tr>
+                                    <th>Patient ID</th>
                                     <th>Patient Name</th>
                                     <th>Date</th>
                                     <th>Screening Type</th>
@@ -159,107 +185,194 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
+
                             <tbody id="screeningTableBody">
+
                                 <tr id="noScreeningsRow">
-                                    <td colspan="6" class="no-screenings">
+
+                                    <td colspan="7" class="no-screenings">
+
                                         <div class="empty-icon">
                                             <i class="fa-solid fa-folder-open"></i>
                                         </div>
+
                                         <h3>No Recent Screenings</h3>
-                                        <p>Start a new screening to see patient reports here.</p>
+
+                                        <p>
+                                            Start a new screening to see patient reports here.
+                                        </p>
+
                                         <button class="empty-screening-btn" id="emptyScreeningBtn">
                                             <i class="fa-solid fa-plus"></i>
                                             Start New Screening
                                         </button>
+
                                     </td>
+
                                 </tr>
+
                             </tbody>
+
                         </table>
+
                     </div>
+
                 </div>
+
                 <div class="right-column">
-                    <div class="quick-actions card">
-                        <h2>Quick Actions</h2>
-                        <button class="action-card" id="quickScreeningBtn">
-                            <div class="action-icon">
-                                <i class="fa-solid fa-user-plus"></i>
-                            </div>
-                            <div class="action-text">
-                                <h3>New Screening</h3>
-                                <p>Register a patient and start a new screening.</p>
-                            </div>
-                            <span class="action-arrow">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </span>
-                        </button>
-                        <button class="action-card" id="quickPatientsBtn">
-                            <div class="action-icon">
-                                <i class="fa-solid fa-users"></i>
-                            </div>
-                            <div class="action-text">
-                                <h3>Patients</h3>
-                                <p>View and manage registered patients.</p>
-                            </div>
-                            <span class="action-arrow">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </span>
-                        </button>
-                        <button class="action-card" id="quickReportsBtn">
-                            <div class="action-icon">
-                                <i class="fa-solid fa-chart-column"></i>
-                            </div>
-                            <div class="action-text">
-                                <h3>Reports</h3>
-                                <p>View screening statistics and reports.</p>
-                            </div>
-                            <span class="action-arrow">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </span>
-                        </button>
-                    </div>
+
                     <div class="alerts card">
+
                         <h2>Important Alerts</h2>
+
                         <button class="alert-item pending-alert" id="pendingAlert">
+
                             <span class="alert-symbol">
                                 <i class="fa-solid fa-triangle-exclamation"></i>
                             </span>
+
                             <span>
                                 <strong id="alertPendingCount">0</strong>
                                 screenings are pending review.
                             </span>
+
                             <span class="alert-arrow">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </span>
+
                         </button>
+
                         <button class="alert-item critical-alert" id="criticalAlert">
+
                             <span class="alert-symbol">
                                 <i class="fa-solid fa-exclamation"></i>
                             </span>
+
                             <span>
                                 <strong id="criticalResultCount">0</strong>
                                 critical results need attention.
                             </span>
+
                             <span class="alert-arrow">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </span>
+
                         </button>
+
                     </div>
+
                 </div>
+
             </section>
+
             <section class="security-card card">
+
                 <div class="security-icon">
                     <i class="fa-solid fa-shield-halved"></i>
                 </div>
+
                 <div class="security-text">
                     <h2>Your Data is Secure</h2>
-                    <p>We follow strict security protocols to ensure patient data privacy and confidentiality.</p>
+                    <p>
+                        We follow strict security protocols to ensure patient data privacy and confidentiality.
+                    </p>
                 </div>
+
                 <div class="security-lock">
                     <i class="fa-solid fa-lock"></i>
                 </div>
+
             </section>
+
         </main>
+
     </div>
+
+    <!-- Patients Directory Modal -->
+    <div class="dashboard-modal-overlay" id="patientsModal" style="display: none;">
+        <div class="dashboard-modal-card">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <i class="fa-solid fa-users modal-icon"></i>
+                    <div>
+                        <h3>Patients Directory</h3>
+                        <p>All registered patients and their current screening status</p>
+                    </div>
+                </div>
+                <button type="button" class="modal-close-btn" id="closePatientsModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="patientSearchInput" placeholder="Search patient by ID, name, or phone...">
+            </div>
+            <div class="modal-table-container">
+                <table class="modal-table">
+                    <thead>
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Name</th>
+                            <th>Age/Gender</th>
+                            <th>Contact</th>
+                            <th>Screening Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patientsModalTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reports & Analytics Modal -->
+    <div class="dashboard-modal-overlay" id="reportsModal" style="display: none;">
+        <div class="dashboard-modal-card">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <i class="fa-solid fa-chart-column modal-icon"></i>
+                    <div>
+                        <h3>Clinical Screening Reports</h3>
+                        <p>Comprehensive diagnostic breakdown and referral epidemiology</p>
+                    </div>
+                </div>
+                <button type="button" class="modal-close-btn" id="closeReportsModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="reports-summary-grid">
+                <div class="report-stat-box">
+                    <span class="stat-num" id="repTotalCases">0</span>
+                    <span class="stat-lbl">Total Screenings</span>
+                </div>
+                <div class="report-stat-box normal-box">
+                    <span class="stat-num" id="repNormalCases">0</span>
+                    <span class="stat-lbl">Normal (Grade 0)</span>
+                </div>
+                <div class="report-stat-box referable-box">
+                    <span class="stat-num" id="repReferableCases">0</span>
+                    <span class="stat-lbl">Referable (Grade >= 2)</span>
+                </div>
+                <div class="report-stat-box critical-box">
+                    <span class="stat-num" id="repCriticalCases">0</span>
+                    <span class="stat-lbl">Sight-Threatening (Grade 3-4)</span>
+                </div>
+            </div>
+            <div class="report-recommendation-card">
+                <h4><i class="fa-solid fa-circle-info"></i> Screening Program Health Insight</h4>
+                <p id="reportInsightText">Loading clinical diagnostic epidemiology...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="primary-btn" onclick="window.location.href='screeninghistory.html'">
+                    <i class="fa-solid fa-clock-rotate-left"></i> View All in Screening History
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="dashboard.js"></script>
+
 </body>
 </html>

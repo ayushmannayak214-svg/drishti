@@ -1,0 +1,7 @@
+Class_Index,Class_Name,Train_Count,Train_Pct,Val_Count,Val_Pct,Total_Count,Total_Pct,Deficit_Ratio_vs_NoDR
+0,No_DR,1444,49.30%,361,49.25%,1805,49.29%,1.00x
+1,Mild,296,10.11%,74,10.10%,370,10.10%,4.88x
+2,Moderate,799,27.28%,200,27.29%,999,27.28%,1.81x
+3,Severe,154,5.26%,39,5.32%,193,5.27%,9.35x
+4,Proliferative_DR,236,8.06%,59,8.05%,295,8.06%,6.12x
+TOTAL,All_Classes,2929,100.0%,733,100.0%,3662,100.0%,-

@@ -1,30 +1,77 @@
+const path = require("path");
 const cors = require("cors");
 const db = require("./db");
 const express = require("express");
+const session = require("express-session");
+
 const authRoutes = require("./routes/auth");
+const predictRoutes = require("./routes/predict");
+const patientRoutes = require("./routes/patients");
+const screeningRoutes = require("./routes/screenings");
 
 const app = express();
-
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
-app.use(cors());
+// Skip ngrok browser warning interstitial for all responses
+app.use((req, res, next) => {
+    res.setHeader("ngrok-skip-browser-warning", "true");
+    next();
+});
+app.use(express.urlencoded({ extended: true }));
 
+app.use(
+    cors({
+        origin: true,
+        credentials: true
+    })
+);
+
+app.use(
+    session({
+        secret: "drishti-session-secret",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            secure: false,
+            maxAge: 24 * 60 * 60 * 1000
+        }
+    })
+);
+
+// API Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/predict", predictRoutes);
+app.use("/api/patients", patientRoutes);
+app.use("/api/screenings", screeningRoutes);
 
+app.get("/api/health", (req, res) => {
+    res.json({
+        status: "ok",
+        platform: "DRISHTI Retinal Screening Platform",
+        timestamp: new Date().toISOString()
+    });
+});
+
+// Serve frontend web files directly
+const frontendDir = path.join(__dirname, "..");
+app.use(express.static(frontendDir));
+
+// Fallback to index.html for root navigation
 app.get("/", (req, res) => {
-    res.send("DIRE backend is running!");
+    res.sendFile(path.join(frontendDir, "index.html"));
 });
 
 db.query("SELECT 1", (err, result) => {
     if (err) {
-        console.error("MySQL connection failed:", err);
+        console.error("Database connection check failed:", err.message);
     } else {
-        console.log("MySQL connection successful!");
+        console.log("Database connection ready!");
     }
 });
 
 app.listen(PORT, () => {
-    console.log(`DIRE backend running on http://localhost:${PORT}`);
+    console.log(`DRISHTI server running on http://localhost:${PORT}`);
 });
