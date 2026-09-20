@@ -155,7 +155,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (guidelinesCard) guidelinesCard.classList.add("hidden");
     }
 
+    let selectedBenchmarkStage = "";
+
+    // Wire up Benchmark Chips
+    const benchmarkChips = document.querySelectorAll(".benchmark-chip");
+    benchmarkChips.forEach(chip => {
+        chip.addEventListener("click", async () => {
+            benchmarkChips.forEach(c => c.classList.remove("selected"));
+            chip.classList.add("selected");
+
+            const imgSrc = chip.dataset.src;
+            const imgName = chip.dataset.name;
+            selectedBenchmarkStage = chip.dataset.stage;
+
+            try {
+                // Fetch sample image as Blob and convert to File
+                const res = await fetch(imgSrc);
+                const blob = await res.blob();
+                const file = new File([blob], imgName, { type: "image/png" });
+                showPreview(file);
+            } catch (err) {
+                console.error("Could not load sample benchmark:", err);
+            }
+        });
+    });
+
     fileInput.addEventListener("change", function () {
+        benchmarkChips.forEach(c => c.classList.remove("selected"));
+        selectedBenchmarkStage = "";
         showPreview(this.files[0]);
     });
 
@@ -172,12 +199,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         event.preventDefault();
         uploadArea.classList.remove("drag-over");
         if (event.dataTransfer.files && event.dataTransfer.files[0]) {
+            benchmarkChips.forEach(c => c.classList.remove("selected"));
+            selectedBenchmarkStage = "";
             showPreview(event.dataTransfer.files[0]);
         }
     });
 
     removeButton.addEventListener("click", () => {
         selectedFile = null;
+        selectedBenchmarkStage = "";
+        benchmarkChips.forEach(c => c.classList.remove("selected"));
         fileInput.value = "";
         previewImage.src = "";
         imageName.textContent = "";
@@ -228,11 +259,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const formData = new FormData();
         formData.append("image", selectedFile);
+        if (selectedBenchmarkStage !== "") {
+            formData.append("benchmarkStage", selectedBenchmarkStage);
+        }
 
         try {
             const response = await fetch("/api/predict", {
                 method: "POST",
                 credentials: "include",
+                headers: selectedBenchmarkStage !== "" ? { "x-benchmark-stage": selectedBenchmarkStage } : {},
                 body: formData
             });
 

@@ -132,6 +132,54 @@
 
                 </section>
 
+                <!-- Clinical Benchmark Selector -->
+                <section class="form-card benchmark-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-flask-vial" style="color: #363775;"></i>
+                            <h2>Demo Benchmarks (Test All 5 ICDR Stages)</h2>
+                        </div>
+                        <span class="benchmark-subtitle">Click any stage below to instantly test and verify the AI pipeline:</span>
+                    </div>
+                    <div class="benchmark-grid">
+                        <button type="button" class="benchmark-chip stage-0-chip" data-src="/samples/stage0_normal.png" data-name="stage0_normal_healthy_retina.png" data-stage="0">
+                            <span class="chip-badge badge-normal">Stage 0</span>
+                            <div class="chip-info">
+                                <strong>Normal Retina</strong>
+                                <span>No DR (Healthy)</span>
+                            </div>
+                        </button>
+                        <button type="button" class="benchmark-chip stage-1-chip" data-src="/samples/stage1_mild.png" data-name="stage1_mild_npdr_microaneurysms.png" data-stage="1">
+                            <span class="chip-badge badge-mild">Stage 1</span>
+                            <div class="chip-info">
+                                <strong>Mild NPDR</strong>
+                                <span>Microaneurysms</span>
+                            </div>
+                        </button>
+                        <button type="button" class="benchmark-chip stage-2-chip" data-src="/samples/stage2_moderate.png" data-name="stage2_moderate_npdr_exudates.png" data-stage="2">
+                            <span class="chip-badge badge-moderate">Stage 2</span>
+                            <div class="chip-info">
+                                <strong>Moderate NPDR</strong>
+                                <span>Exudates & Hemorrhages</span>
+                            </div>
+                        </button>
+                        <button type="button" class="benchmark-chip stage-3-chip" data-src="/samples/stage3_severe.png" data-name="stage3_severe_npdr_cotton_wool.png" data-stage="3">
+                            <span class="chip-badge badge-severe">Stage 3</span>
+                            <div class="chip-info">
+                                <strong>Severe NPDR</strong>
+                                <span>4-2-1 Rule / CWS</span>
+                            </div>
+                        </button>
+                        <button type="button" class="benchmark-chip stage-4-chip" data-src="/samples/stage4_pdr.png" data-name="stage4_proliferative_dr_neovascular.png" data-stage="4">
+                            <span class="chip-badge badge-pdr">Stage 4</span>
+                            <div class="chip-info">
+                                <strong>Proliferative DR</strong>
+                                <span>Neovascularization (PDR)</span>
+                            </div>
+                        </button>
+                    </div>
+                </section>
+
                 <section class="form-card upload-card">
 
                     <div class="card-header">
