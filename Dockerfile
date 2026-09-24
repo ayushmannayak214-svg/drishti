@@ -22,12 +22,12 @@ RUN cd backend && npm install --omit=dev
 # Copy application source files
 COPY . .
 
-# Ensure upload directory and storage have full permissions for non-root container users (Hugging Face)
-RUN mkdir -p backend/uploads version4/model/results && chmod -R 777 /app
+# Ensure upload directory and storage have write permissions
+RUN mkdir -p backend/uploads version4/model/results && chmod -R 777 backend/uploads version4/model/results
 
-# Hugging Face Spaces expects port 7860
-ENV PORT=7860
-EXPOSE 7860
+# Expose default port
+ENV PORT=5000
+EXPOSE 5000
 
 # Start DRISHTI server
 CMD ["node", "backend/server.js"]

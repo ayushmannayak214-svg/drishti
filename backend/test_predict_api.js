@@ -6,6 +6,7 @@ const testImages = [
     path.resolve(__dirname, "..", "version4", "model", "results", "normal_benchmark.png"),
     path.resolve(__dirname, "..", "version4", "model", "results", "moderate_wikimedia.png"),
     path.resolve(__dirname, "..", "version4", "model", "results", "pdr_wikimedia.jpg"),
+    path.resolve(__dirname, "..", "version4", "model", "results", "last_uploaded.png"),
 ];
 
 async function runTest(img) {
