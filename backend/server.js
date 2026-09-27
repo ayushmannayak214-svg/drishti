@@ -13,6 +13,9 @@ const screeningRoutes = require("./routes/screenings");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Enable trust proxy for cloud environments (Render, Cloudflare, etc.)
+app.set("trust proxy", 1);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
