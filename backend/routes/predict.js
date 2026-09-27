@@ -133,9 +133,9 @@ async function validateRetinalImage(imagePath) {
     // Retinal images always have corners that are: black, white, OR warm-orange.
     const cSz = Math.max(5, Math.floor(Math.min(width, height) * 0.10));
     const corners = [
-        [0,           0          ],
-        [width - cSz, 0          ],
-        [0,           height - cSz],
+        [0, 0],
+        [width - cSz, 0],
+        [0, height - cSz],
         [width - cSz, height - cSz]
     ];
     let cDark = 0, cWhite = 0, cWarm = 0, cTotal = 0;
@@ -145,15 +145,15 @@ async function validateRetinalImage(imagePath) {
                 const { r, g, b } = px(x, y);
                 const l = lum(r, g, b);
                 cTotal++;
-                if (l < 35)         cDark++;   // near-black border
-                else if (l > 220)   cWhite++;  // near-white border
+                if (l < 35) cDark++;   // near-black border
+                else if (l > 220) cWhite++;  // near-white border
                 else if (r > b + 10) cWarm++;  // warm (orange/red) retinal tissue
             }
         }
     }
-    const cornerDarkRatio  = cDark  / cTotal;
+    const cornerDarkRatio = cDark / cTotal;
     const cornerWhiteRatio = cWhite / cTotal;
-    const cornerWarmRatio  = cWarm  / cTotal;
+    const cornerWarmRatio = cWarm / cTotal;
     console.log(`[IQA] Corners: dark=${cornerDarkRatio.toFixed(2)} white=${cornerWhiteRatio.toFixed(2)} warm=${cornerWarmRatio.toFixed(2)}`);
 
     // Reject ONLY if corners are clearly cold/neutral (not black, white, or warm)
@@ -167,7 +167,7 @@ async function validateRetinalImage(imagePath) {
     // Sample the central 50% of the image and require:
     //   • avgR > avgB  (red-dominant in the centre)
     //   • >= 30% of non-black pixels have R > B+10  (warm orange/red tones)
-    const cx0 = Math.floor(width  * 0.25), cx1 = Math.floor(width  * 0.75);
+    const cx0 = Math.floor(width * 0.25), cx1 = Math.floor(width * 0.75);
     const cy0 = Math.floor(height * 0.25), cy1 = Math.floor(height * 0.75);
     const wStep = Math.max(1, Math.floor(Math.min(width, height) / 60));
     let sumR = 0, sumB = 0, warmPx = 0, brightPx = 0, wSampled = 0;
@@ -280,6 +280,50 @@ function fallbackNodeAnalysis(imagePath, originalName) {
     };
 }
 
+router.get("/latest", (req, res, next) => {
+    if (!req.session.user) {
+        return res.status(401).json({ error: "Not authenticated" });
+    }
+    next();
+}, (req, res) => {
+    const publicLastUploaded = path.join(projectRoot, "results", "last_uploaded.png");
+    if (!fs.existsSync(publicLastUploaded)) {
+        return res.status(404).json({ error: "No recently uploaded scan found" });
+    }
+    const pythonInterpreter = resolvePythonPath();
+    const scriptArgs = ["-u", "predict.py", publicLastUploaded, "uploaded_retina.png"];
+    let python = null;
+    try {
+        python = spawn(pythonInterpreter, scriptArgs, { cwd: projectRoot });
+    } catch (spawnError) {
+        console.warn("[AI Engine] Latest check fallback:", spawnError.message);
+        const fallbackResult = fallbackNodeAnalysis(publicLastUploaded, "uploaded_retina.png");
+        fallbackResult.imageUrl = "/version4/model/results/last_uploaded.png?t=" + Date.now();
+        return res.json(fallbackResult);
+    }
+
+    let output = "";
+    python.stdout.on("data", (data) => {
+        output += data.toString();
+    });
+
+    python.on("close", () => {
+        try {
+            const match = output.match(/\{[\s\S]*\}/);
+            if (!match) throw new Error("Could not parse AI output");
+            const result = JSON.parse(match[0].replace(/'/g, '"'));
+            result.imageUrl = "/version4/model/results/last_uploaded.png?t=" + Date.now();
+            console.log("[AI Engine] Latest scan evaluated:", result.prediction, `(${result.confidence}%)`);
+            return res.json(result);
+        } catch (e) {
+            console.warn("[AI Engine] Parse issue on latest scan:", e.message);
+            const fallbackResult = fallbackNodeAnalysis(publicLastUploaded, "uploaded_retina.png");
+            fallbackResult.imageUrl = "/version4/model/results/last_uploaded.png?t=" + Date.now();
+            return res.json(fallbackResult);
+        }
+    });
+});
+
 router.post("/", (req, res, next) => {
     if (!req.session.user) {
         return res.status(401).json({
@@ -301,18 +345,18 @@ router.post("/", (req, res, next) => {
     } catch (iqaErr) {
         // If IQA itself crashes for any unexpected reason, reject safely
         console.error("[IQA] Unexpected error during validation:", iqaErr.message);
-        fs.unlink(req.file.path, () => {});
+        fs.unlink(req.file.path, () => { });
         return res.status(422).json({
             error: "Image quality assessment failed. Please upload a valid retinal fundus image.",
             iqa_rejection: "IQA_ERROR"
         });
     }
     if (!iqaResult.valid) {
-        fs.unlink(req.file.path, () => {});
+        fs.unlink(req.file.path, () => { });
         const messages = {
-            BLURRY:      "Image rejected: the photo appears blurry or out of focus. Please upload a clear, well-focused retinal fundus image.",
+            BLURRY: "Image rejected: the photo appears blurry or out of focus. Please upload a clear, well-focused retinal fundus image.",
             NOT_RETINAL: "Image rejected: this does not appear to be a retinal fundus photograph. Please upload a valid retinal image for screening.",
-            UNREADABLE:  "Image rejected: the file could not be read or is corrupted. Please try a different image."
+            UNREADABLE: "Image rejected: the file could not be read or is corrupted. Please try a different image."
         };
         return res.status(422).json({
             error: messages[iqaResult.reason] || "Image quality check failed: unreadable retina.",
@@ -350,7 +394,7 @@ router.post("/", (req, res, next) => {
         console.warn("[AI Engine] Could not spawn Python, activating in-process analyzer:", spawnError.message);
         const result = fallbackNodeAnalysis(req.file.path, originalName);
         result.imageUrl = "/version4/model/results/last_uploaded.png?t=" + Date.now();
-        fs.unlink(req.file.path, () => {});
+        fs.unlink(req.file.path, () => { });
         return res.json(result);
     }
 
@@ -370,7 +414,7 @@ router.post("/", (req, res, next) => {
         executionFinished = true;
 
         const tempPath = req.file.path;
-        fs.unlink(tempPath, () => {});
+        fs.unlink(tempPath, () => { });
 
         // Try extracting JSON output from stdout
         try {
@@ -403,7 +447,7 @@ router.post("/", (req, res, next) => {
 
         console.warn("[AI Engine Error]:", error.message);
         console.log("[AI Engine] Falling back to validated clinical analyzer...");
-        fs.unlink(req.file.path, () => {});
+        fs.unlink(req.file.path, () => { });
         const fallbackResult = fallbackNodeAnalysis(req.file.path, originalName);
         return res.json(fallbackResult);
     });
